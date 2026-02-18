@@ -1,0 +1,45 @@
+# This is problem of  Codeforces round 1089
+# Problem: B. Array and Permutation
+#Given a permutation p of length n∗ and an array a of length n.
+#We call the permutation p generating for the array a if the array a can be obtained from the permutation p by applying some number of operations (possibly zero) of the following type:
+
+#Choose an index i(1≤i<n) and perform one of two replacements:
+#pi:=pi+1; pi+1:=pi.
+#In other words, in one operation, you can choose two adjacent elements of the array and copy the value of one into the other.You are required to report whether the permutation p is generating for the array a.
+# ∗A permutation of length n is an array consisting of n distinct integers from 1 to n in arbitrary order. For example, [2,3,1,5,4] is a permutation, but [1,2,2] is not a permutation (2 appears twice in the array), and [1,3,4]is also not a permutation (n=3 but there is 4 in the array).
+
+#Input
+
+#Each test contains multiple test cases. The first line contains the number of test cases t(1≤t≤104). The description of the test cases follows.
+#The first line of each test case contains a single integer n(2≤n≤2⋅105) — the length of the array and the permutation.
+#The second line of each test case contains n integers p1,p2,…,pn(1≤pi≤n) — the elements of the permutation.
+#The third line of each test case contains n integers a1,a2,…,an(1≤ai≤n) — the elements of the array.
+
+#It is guaranteed that the sum of n across all test cases does not exceed 2⋅105.
+
+#Output
+
+#For each test case, output "YES" if the permutation p is generating for the array a, otherwise output "NO".
+
+#You may output each letter in any case (lowercase or uppercase). For example, the strings "yEs", "yes", "Yes", and "YES" will be accepted as a positive answer.
+import sys
+input = sys.stdin.read
+
+t=int(input())
+for _ in range(t):
+    n=int(input())
+    p=list(map(int, input().split()))
+    a=list(map(int, input().split()))
+
+    pos=[0]*(n+1)
+    for i, x  in enumerate(p):
+        pos[x]=i
+        ok=True
+        prev=-1
+        for x in a:
+            cur= pos[x]
+            if prev>cur:
+                ok=False
+                break
+            prev=cur
+    print("YES" if ok else "NO")
